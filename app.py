@@ -1,88 +1,3 @@
-# import streamlit as st
-# import tensorflow as tf
-# from PIL import Image
-# import numpy as np
-# import joblib
-
-# # ================= PAGE CONFIG (MUST BE FIRST) =================
-# st.set_page_config(
-#     page_title="Food Image Classifier",
-#     page_icon="🍔",
-#     layout="centered"
-# )
-
-# # ================= LOAD MODEL & CLASSES =================
-# @st.cache_resource
-# def load_model_and_classes():
-#     model = tf.keras.models.load_model("food_model.h5")
-#     class_names = joblib.load("class_names.pkl")
-#     return model, class_names
-
-# model, class_names = load_model_and_classes()
-
-# img_height = 128
-# img_width = 128
-
-# # ================= SIDEBAR =================
-# st.sidebar.title("About App")
-# st.sidebar.info(
-#     "**Food Image Classifier**\n\n"
-#     "Upload a food image\n\n"
-#     "CNN-based AI model\n\n"
-#     "Streamlit Web App"
-# )
-
-# # ================= TITLE =================
-# st.markdown(
-#     """
-#     <h1 style='text-align: center; color: #FF5733;'>Food Image Classifier</h1>
-#     <p style='text-align: center; font-size: 18px;'>
-#     Upload a food image and let AI predict its category!
-#     </p><hr>
-#     """,
-#     unsafe_allow_html=True
-# )
-
-# # ================= FILE UPLOAD =================
-# st.subheader("Upload a Food Image")
-# uploaded_file = st.file_uploader(
-#     "Supported formats: JPG, JPEG, PNG",
-#     type=["jpg", "jpeg", "png"]
-# )
-
-# # ================= MAIN LOGIC =================
-# if uploaded_file is not None:
-#     image = Image.open(uploaded_file).convert("RGB")
-
-#     st.image(image, caption="Uploaded Image", use_column_width=True)
-
-#     # -------- PREPROCESS (MATCHES TRAINING) --------
-#     image = image.resize((img_width, img_height))
-#     image_array = tf.keras.preprocessing.image.img_to_array(image)
-#     image_array = image_array / 255.0
-#     image_array = np.expand_dims(image_array, axis=0)
-
-#     # -------- PREDICT --------
-#     with st.spinner("Analyzing image..."):
-#         predictions = model.predict(image_array)
-
-#     predicted_index = np.argmax(predictions[0])
-#     predicted_label = class_names[predicted_index]
-#     confidence = float(np.max(predictions[0]) * 100)
-
-#     # -------- OUTPUT --------
-#     st.success(
-#         f"Prediction: {predicted_label}\n\n"
-#         f"Confidence: {confidence:.2f}%"
-#     )
-
-#     # -------- OPTIONAL: TOP 3 PREDICTIONS --------
-#     st.subheader("Top Predictions")
-#     top3 = np.argsort(predictions[0])[-3:][::-1]
-#     for i in top3:
-#         st.write(f"{class_names[i]}: {predictions[0][i] * 100:.2f}%")
-
-
 import streamlit as st
 import tensorflow as tf
 import numpy as np
@@ -200,4 +115,5 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
+
 
